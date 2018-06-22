@@ -42,6 +42,14 @@ html * {
 	color: #000;
 }
 
+.green {
+	color: $green;
+}
+
+.red {
+	color: $red;
+}
+
 .yellow {
 	color: #ffc107;
 }
@@ -147,7 +155,7 @@ html * {
 .centerRelative {
 	position: relative;
 	top: 50%;
-	transform: translateY(50%);
+	transform: translateY(-50%);
 }
 
 .centerAbsolute {
@@ -216,4 +224,12 @@ html * {
 
 .va-middle {
 	vertical-align: middle;
+}
+
+.h-100 {
+	height: 100px;
+}
+
+.h-100p {
+	height: 100%;
 }
