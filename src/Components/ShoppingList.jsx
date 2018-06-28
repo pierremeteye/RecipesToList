@@ -4,14 +4,12 @@ export default class ShoppingList extends Component {
 
 	render(){
 		if (this.props.data) {
-			var shoppingList = this.props.shoppinglist.map((items, i) => {
+			// console.log(this.props.list);
+			var shoppingList = this.props.list.map((items, i) => {
+									console.log(items);
 				return  <div key={i}>
 							<ul className="col-12 f-l noListStyle p-b-10">
-								{
-									items.ingredients.map((el, i)  => {
-										return <li className="uppercaseFirstLetter" key={i}>{el.name}<span className="red">{el.quantity == 0 ? '' : ' / ' + el.quantity} {el.quantity == 0 ? '' : el.unit}</span></li>;
-									})
-								}
+								{items}
 							</ul>
 						</div>
 			})
