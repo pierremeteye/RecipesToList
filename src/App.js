@@ -12,15 +12,16 @@ class App extends Component {
             error: null,
             isLoaded: false,
             items: [],
-            ingredients: []
+            ingredients: [],
+            quantity: []
         };
     }
-
     getIngredientsList(dataFromList){
-        console.log(this.state);
         this.setState({ingredients: Array.from(new Set(dataFromList))})
     }
-
+    getNumber(getNumber){
+        this.setState({quantity: getNumber})
+    }
     componentDidMount() {
         fetch("recipes.json")
         .then(res => res.json())
@@ -48,8 +49,18 @@ class App extends Component {
         } else {
             return (
                 <div id="main">
-                    <RecipeList className="test" data={this.state.items} shoppinglist={this.state.ingredients} getIngredient={this.getIngredientsList.bind(this)}/>
-                    <ShoppingList data={this.state.items} list={this.state.ingredients}/>
+                    <RecipeList 
+                        data={this.state.items} 
+                        shoppinglist={this.state.ingredients} 
+                        getIngredient={this.getIngredientsList.bind(this)}
+                        getNumber={this.getNumber.bind(this)}
+                       
+                    />
+                    <ShoppingList 
+                        data={this.state.items} 
+                        ingredients={this.state.ingredients}
+                        quantity={this.state.quantity}
+                    />
                 </div>
             );
         }

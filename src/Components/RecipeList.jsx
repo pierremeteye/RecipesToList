@@ -13,6 +13,9 @@ class RecipeList extends Component {
     getIngredientsPopup(dataFromPopup) {
         this.props.getIngredient(dataFromPopup)
     }
+    getNumber(getNumber){
+        this.props.getNumber(getNumber)
+    }
     showPopup(i) {
         this.setState(prevState => ({
             value: i,
@@ -44,10 +47,15 @@ class RecipeList extends Component {
                         {recipes}
                         <div className={this.state.isHidden === true ? 'popup' : 'popup hide' }>
                             <div className="col-6 bgWhite fullCentered p-20 p-t-0">
-                                <a href="#" onClick={this.closePopup.bind(this)}>
+                                <p className="pointer" onClick={this.closePopup.bind(this)}>
                                     <i className="zmdi zmdi-close fs-50 f-r p-10 p-r-0"></i>
-                                </a>
-                                <Popup data={this.props.data} getValue={this.state.value} getIngredients={this.getIngredientsPopup.bind(this)}/>
+                                </p>
+                                <Popup 
+                                    data={this.props.data} 
+                                    getValue={this.state.value} 
+                                    getIngredients={this.getIngredientsPopup.bind(this)}
+                                    getNumber={this.getNumber.bind(this)}
+                                />
                             </div>
                         </div>
                         <div className="both"></div>
