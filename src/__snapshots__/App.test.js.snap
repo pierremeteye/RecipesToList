@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly App Component 1`] = `
+<div>
+  Loading...
+</div>
+`;
+
+exports[`renders correctly Popup Component 1`] = `
+<div>
+  <h2
+    className="col-12 f-l center"
+  >
+     / 
+    <span
+      className="green"
+    >
+       persons
+    </span>
+  </h2>
+  <div
+    className="col-12 f-l p-t-45"
+  >
+    <div
+      className="col-6 f-l"
+    >
+      <h3
+        className="col-12 f-l p-b-10"
+      >
+        Ingredients List
+      </h3>
+      <ul
+        className="col-12 f-l noListStyle p-b-10"
+      />
+    </div>
+    <div
+      className="col-6 f-l"
+    >
+      <img
+        className="col-8 offset-col-2 f-l"
+        src="images/undefined"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 f-l"
+  >
+    <h3
+      className="p-t-10 p-b-10"
+    >
+      Instructions
+    </h3>
+    <p />
+  </div>
+  <div
+    className="col-12 f-l p-t-30 p-b-30 center"
+  >
+    <button
+      className="pointer"
+      onClick={[Function]}
+    >
+      Add this recipe to my shopping list
+    </button>
+  </div>
+</div>
+`;
+
+exports[`renders correctly RecipeList Component 1`] = `
+<div
+  className="RecipeList col-12"
+>
+  <div
+    className="col-6 f-l"
+  >
+    <div
+      className="p-30"
+    >
+      <h3
+        className="col-12 f-l p-b-10"
+      >
+        Ingredients List
+      </h3>
+      <div
+        className="col-12 f-l relative m-t-10"
+        key="0"
+      >
+        <div
+          className="col-8 f-l"
+        >
+          <p
+            className="col-8 f-l"
+          />
+          <button
+            className="f-l pointer"
+            onClick={[Function]}
+          >
+            Voir la recette
+          </button>
+        </div>
+        <div
+          className="col-4 f-l"
+        >
+          <img
+            className="col-4 f-l"
+            src="images/undefined"
+          />
+        </div>
+      </div>
+      <div
+        className="popup hide"
+      >
+        <div
+          className="col-6 bgWhite fullCentered p-20 p-t-0"
+        >
+          <p
+            className="pointer"
+            onClick={[Function]}
+          >
+            <i
+              className="zmdi zmdi-close fs-50 f-r p-10 p-r-0"
+            />
+          </p>
+          <Popup
+            data={
+              Array [
+                "test",
+              ]
+            }
+            getIngredients={[Function]}
+            getNumber={[Function]}
+            getValue={null}
+            ingredients={null}
+          />
+        </div>
+      </div>
+      <div
+        className="both"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders correctly ShoppingList Component 1`] = `""`;

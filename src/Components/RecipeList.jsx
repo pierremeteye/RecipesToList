@@ -7,7 +7,8 @@ class RecipeList extends Component {
         super(props);
         this.state = {
             value: null,
-            isHidden: false
+            isHidden: false,
+            ingredients: null
         };
     }
     getIngredientsPopup(dataFromPopup) {
@@ -21,6 +22,10 @@ class RecipeList extends Component {
             value: i,
             isHidden: true
         }));
+        let lis = this.props.initialIngredients[i].map((el, i)  => {
+            return <li className="uppercaseFirstLetter" key={i}>{el.name}<span className="red">{el.quantity === 0 ? '' : ' / ' + Math.round(el.quantity)} {el.quantity === 0 ? '' : el.unit}</span></li>;
+        });
+        this.setState({ingredients: lis})
     }
     closePopup(){
         this.setState(prevState => ({
@@ -52,6 +57,7 @@ class RecipeList extends Component {
                                 </p>
                                 <Popup 
                                     data={this.props.data} 
+                                    ingredients={this.state.ingredients} 
                                     getValue={this.state.value} 
                                     getIngredients={this.getIngredientsPopup.bind(this)}
                                     getNumber={this.getNumber.bind(this)}

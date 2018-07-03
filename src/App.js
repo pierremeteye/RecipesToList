@@ -12,7 +12,8 @@ class App extends Component {
             error: null,
             isLoaded: false,
             items: [],
-            ingredients: [],
+            initialIngredients: [],
+            ingredientsFromPopup: [],
             quantity: [],
             list: {}
         };
@@ -28,9 +29,18 @@ class App extends Component {
         .then(res => res.json())
         .then(
             (result) => {
+                let getItemsArr = [];
+                let newGetItemsArr = [];
+                result.map((el, i) => {
+                   return getItemsArr.push(el.ingredients);
+                });
+                getItemsArr.map((el, i) => {
+                   return newGetItemsArr.push(el);
+                });
                 this.setState({
                     isLoaded: true,
-                    items: result
+                    items: result,
+                    initialIngredients: getItemsArr
                 });
             },
             (error) => {
@@ -40,6 +50,12 @@ class App extends Component {
                 });
             }
             );
+            // var getItems = this.state.items.map(function(index, elem) {
+            //     console.log(index);
+            //     return index.ingredients;
+            // })
+            // this.setState({initialIngredients: getItems})
+
     }
     render() {
         const { error, isLoaded } = this.state;
@@ -52,7 +68,8 @@ class App extends Component {
                 <div id="main">
                     <RecipeList 
                         data={this.state.items} 
-                        shoppinglist={this.state.ingredients} 
+                        initialIngredients={this.state.initialIngredients} 
+                        shoppinglist={this.state.ingredientsFromPopup} 
                         getIngredient={this.getIngredientsList.bind(this)}
                         getNumber={this.getNumber.bind(this)}
                        
@@ -60,7 +77,7 @@ class App extends Component {
                     <ShoppingList 
                         data={this.state.items} 
                         list={this.state.list}
-                        ingredients={this.state.ingredients}
+                        ingredients={this.state.ingredientsFromPopup}
                         quantity={this.state.quantity}
                     />
                 </div>

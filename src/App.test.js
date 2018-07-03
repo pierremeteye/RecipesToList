@@ -1,60 +1,61 @@
-import React from 'react';
-
-import Enzyme, { shallow } from "enzyme";
+import React from "react";
+import Enzyme, { shallow, render, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-Enzyme.configure({adapter: new Adapter() })
+import { createSerializer } from "enzyme-to-json";
+import sinon from "sinon";
 
-import App from "./App";
-import RecipeList from "./Components/RecipeList";
-import ShoppingList from "./Components/ShoppingList";
+expect.addSnapshotSerializer(createSerializer({ mode: "deep" }));
 
-const AppComponent = shallow( <App /> ),
-	RecipeListComponent = shallow( <RecipeList /> ),
-	ShoppingListComponent = shallow( <ShoppingList /> )
-;
+Enzyme.configure({ adapter: new Adapter() });
 
-//For snapshots
+// Components import
+import App from './App.js';
+import Popup from './Components/Popup.jsx';
+import RecipeList from './Components/RecipeList.jsx';
+import ShoppingList from './Components/ShoppingList.jsx';
 
-// const AppComponent = shallow(
-// 	<App />
-// ).getElement();
-
-const RecipeListSnapshot = shallow(
-	<RecipeList />
-).getElement();
-
-// const ShoppingListComponent = shallow(
-// 	<ShoppingList />
-// ).getElement();
-
-import sum from './tests/sum.js';
-import sub from './tests/sub.js';
-
-describe('App Component', () => {
-	it('should return App Component', () => {
-		expect(AppComponent);
-	});
+it("renders correctly App Component", () => {
+	const AppTest = shallow(
+		<App />
+		);
+	expect(AppTest);
+  // expect(AppTest).toMatchSnapshot();
 });
 
-describe('RecipeList Component', () => {
-	it('should return RecipeList Component', () => {
-		expect(RecipeListSnapshot).toMatchSnapshot();
-	});
-	it('should return a button', () => {
-		expect(RecipeListComponent.find('.RecipeList').length).toEqual(1);
-	});
+it("renders correctly Popup Component", () => {
+	const dataPopup = {
+		title: 'test',
+		arr: ['test'],
+		value: 0
+	}
+	const PopupTest = shallow(
+		<Popup 
+		data={dataPopup.title} 
+		getValue={dataPopup.value}
+		initialIngredients={dataPopup.arr}
+		/>
+		);
+	expect(PopupTest);
+  // expect(PopupTest).toMatchSnapshot();
 });
 
-describe('ShoppingList Component', () => {
-	it('should return ShoppingList Component', () => {
-		expect(ShoppingList);
-	});
+it("renders correctly RecipeList Component", () => {
+	const dataRecipeList = {
+		arr: ['test']
+	}
+	const RecipeListTest = shallow(
+		<RecipeList 
+		data={dataRecipeList.arr} 
+		/>
+		);
+	expect(RecipeListTest);
+  // expect(RecipeListTest).toMatchSnapshot();
 });
 
-describe('Button', () => {
- it('Should have a button', () => {
-   	
-	// wrapper.find('a').simulate('click');
-	// expect(wrapper.find('.clicks-1').length).to.equal(1);
- });
+it("renders correctly ShoppingList Component", () => {
+	const ShoppingListTest = shallow(
+		<ShoppingList />
+		);
+	expect(ShoppingListTest);
+  // expect(ShoppingListTest).toMatchSnapshot();
 });

@@ -36,17 +36,14 @@ export default class Popup extends Component {
         if (this.props.getValue === null) {
             return '';
         } else {
+        
             return  <div>
                         <h2 className="col-12 f-l center">{this.props.data[this.props.getValue].title} / <span className="green">{this.props.data[this.props.getValue].servings} persons</span></h2>
                         <div className="col-12 f-l p-t-45">
                             <div className="col-6 f-l">
                                 <h3 className="col-12 f-l p-b-10">Ingredients List</h3>
                                 <ul className="col-12 f-l noListStyle p-b-10">
-                                    {
-                                        this.props.data[this.props.getValue].ingredients.map((el, i)  => {
-                                            return <li className="uppercaseFirstLetter" key={i}>{el.name}<span className="red">{el.quantity === 0 ? '' : ' / ' + el.quantity} {el.quantity === 0 ? '' : el.unit}</span></li>;
-                                        })
-                                    }
+                                    {this.props.ingredients}
                                 </ul>
                             </div>
                             <div className="col-6 f-l">
