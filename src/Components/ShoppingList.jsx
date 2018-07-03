@@ -3,26 +3,17 @@ import React, {Component} from "react";
 export default class ShoppingList extends Component {
 
 	render(){
-		if (this.props.list) {
+        if (this.props.data) {
 			let arrQuantity = Object.values(this.props.list),
-				arrIngredients = Object.keys(this.props.list)
-				// ingredients = arrIngredients.map((items, i) => {
-				// 	return <tr key={items + '-' + i}><td>{items}</td></tr>;
-				// }),
-				// quantity = arrQuantity.map((quantity, i) => {
-				// 	return <tr key={quantity + '-' + i}><td>{quantity}</td></tr>;
-				// })
+				arrIngredients = Object.keys(this.props.list),
+                ingredients = arrIngredients.map((ingredient, i) => {
+                    return <tr key={ingredient + '-' + i}><td>{ingredient}</td></tr>;
+                }),
+                quantity = arrQuantity.map((quantity, i) => {
+                    return <tr key={quantity + '-' + i}><td>{quantity}</td></tr>;
+                })
+
 			;
-
-			// let ingredients = this.props.list.map((items, i) => {
-			// 	return <tr key={items + '-' + i}><td>{items.ingredients}</td></tr>;
-			// });
-
-			let ingredients = "";
-
-			arrQuantity.forEach( function(items, i) {
-				ingredients += "<tr><td>" + items.ingredients + "</td></tr>"
-			});
 
 			return 	<div className="ShoppingList col-12">
 			            <div className="col-6 f-l">
@@ -38,14 +29,14 @@ export default class ShoppingList extends Component {
 											{ingredients}
 										</tbody>
 									</table>
-									{/*<table className="f-l">
+									<table className="f-l">
 										<tbody>
 											<tr>
 												<th>Quantity</th>
 											</tr>
 											{quantity}
 										</tbody>
-									</table>*/}
+									</table>
 								</div>
 		                    </div>
 		                </div>
