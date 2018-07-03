@@ -13,11 +13,12 @@ class App extends Component {
             isLoaded: false,
             items: [],
             ingredients: [],
-            quantity: []
+            quantity: [],
+            list: {}
         };
     }
     getIngredientsList(dataFromList){
-        this.setState({ingredients: Array.from(new Set(dataFromList))})
+        this.setState({list: dataFromList})
     }
     getNumber(getNumber){
         this.setState({quantity: getNumber})
@@ -58,6 +59,7 @@ class App extends Component {
                     />
                     <ShoppingList 
                         data={this.state.items} 
+                        list={this.state.list}
                         ingredients={this.state.ingredients}
                         quantity={this.state.quantity}
                     />

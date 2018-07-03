@@ -5,36 +5,32 @@ export default class Popup extends Component {
         super(props);
         this.state = {
             ingredients: [],
-            quantity: [],
-            list: ''
+            quantity: []
         };
     }
 
     addToShoppingList(el, i) {
+        console.log(this.props)
         this.props.data[this.props.getValue].ingredients.map((el, i)  => {
             let quantity = (el.quantity === 0 ? '' : ' / ' + Math.round(el.quantity)) + '' + (el.quantity === 0 ? '' : el.unit)
             this.state.ingredients.push(el.name)
             this.state.quantity.push(Math.round(el.quantity))
         })
-        this.props.getNumber(this.state.quantity);
-        this.props.getIngredients(this.state.ingredients);
 
         let arr = this.state.ingredients,
             list = {}
         ;
 
-        for (var i = 0; i < arr.length; i++) {
-            if (list[this.state.ingredients[i]] === undefined) {
-                list[this.state.ingredients[i]] = this.state.quantity[i];
-            } else {
-                list[this.state.ingredients[i]] += this.state.quantity[i];   
+            for (var i = 0; i < arr.length; i++) {
+                if (list[this.state.ingredients[i]] === undefined) {
+                    list[this.state.ingredients[i]] = this.state.quantity[i];
+                } else {
+                    list[this.state.ingredients[i]] += this.state.quantity[i];   
+                }
             }
+
+            this.props.getIngredients(list);
         }
-        this.setState({
-            list: list
-        })        
-        console.log(this.state.list);
-    }
 
     render() {
         if (this.props.getValue === null) {
