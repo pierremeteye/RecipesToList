@@ -25,7 +25,7 @@ export default class App extends Component {
         this.setState({quantity: getNumber})
     }
     componentDidMount() {
-        fetch("recipes.json")
+        fetch("https://api.myjson.com/bins/6mp2c")
         .then(res => res.json())
         .then(
             (result) => {
