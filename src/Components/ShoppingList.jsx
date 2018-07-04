@@ -12,7 +12,6 @@ export default class ShoppingList extends Component {
                 quantity = arrQuantity.map((quantity, i) => {
                     return <tr key={quantity + '-' + i}><td>{quantity}</td></tr>;
                 })
-
 			;
 
 			return 	<div className="ShoppingList col-12">

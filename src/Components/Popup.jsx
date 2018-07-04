@@ -10,7 +10,6 @@ export default class Popup extends Component {
     }
 
     addToShoppingList(el, i) {
-        console.log(this.props)
         this.props.data[this.props.getValue].ingredients.map((el, i)  => {
             let quantity = (el.quantity === 0 ? '' : ' / ' + Math.round(el.quantity)) + '' + (el.quantity === 0 ? '' : el.unit)
             this.state.ingredients.push(el.name)

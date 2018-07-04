@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import RecipeList from './Components/RecipeList';
 import ShoppingList from './Components/ShoppingList';
 
-class App extends Component {
+export default class App extends Component {
 
     constructor(props) {
         super(props);
@@ -50,12 +50,6 @@ class App extends Component {
                 });
             }
             );
-            // var getItems = this.state.items.map(function(index, elem) {
-            //     console.log(index);
-            //     return index.ingredients;
-            // })
-            // this.setState({initialIngredients: getItems})
-
     }
     render() {
         const { error, isLoaded } = this.state;
@@ -85,5 +79,3 @@ class App extends Component {
         }
     }
 }
-
-export default App;
