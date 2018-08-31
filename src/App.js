@@ -4,7 +4,10 @@ import React, { Component } from 'react';
 import RecipeList from './Components/RecipeList';
 import ShoppingList from './Components/ShoppingList';
 
-export default class App extends Component {
+import { connect } from 'react-redux';
+import articleReducer from './actions/actions.js';
+
+class App extends Component {
 
     constructor(props) {
         super(props);
@@ -18,64 +21,32 @@ export default class App extends Component {
             list: {}
         };
     }
-    getIngredientsList(dataFromList){
-        this.setState({list: dataFromList})
-    }
-    getNumber(getNumber){
-        this.setState({quantity: getNumber})
-    }
+
     componentDidMount() {
-        fetch("https://api.myjson.com/bins/6mp2c")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                let getItemsArr = [];
-                let newGetItemsArr = [];
-                result.map((el, i) => {
-                   return getItemsArr.push(el.ingredients);
-                });
-                getItemsArr.map((el, i) => {
-                   return newGetItemsArr.push(el);
-                });
-                this.setState({
-                    isLoaded: true,
-                    items: result,
-                    initialIngredients: getItemsArr
-                });
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
-            }
-            );
+        this.props.onApiRequest();
     }
+
     render() {
-        const { error, isLoaded } = this.state;
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
-            return (
-                <div id="main">
-                    <RecipeList 
-                        data={this.state.items} 
-                        initialIngredients={this.state.initialIngredients} 
-                        shoppinglist={this.state.ingredientsFromPopup} 
-                        getIngredient={this.getIngredientsList.bind(this)}
-                        getNumber={this.getNumber.bind(this)}
-                       
-                    />
-                    <ShoppingList 
-                        data={this.state.items} 
-                        list={this.state.list}
-                        ingredients={this.state.ingredientsFromPopup}
-                        quantity={this.state.quantity}
-                    />
-                </div>
-            );
-        }
+        return (
+            <div id="main">
+                <RecipeList />
+                <ShoppingList 
+                    data={this.state.items} 
+                    list={this.state.list}
+                    ingredients={this.state.ingredientsFromPopup}
+                    quantity={this.state.quantity}
+                />
+            </div>
+        );
     }
 }
+
+const mapStateToProps = state => ({
+    articles: state.articles
+})
+
+const mapActionsToProps = {
+    onApiRequest: articleReducer
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(App);

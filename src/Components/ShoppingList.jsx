@@ -1,6 +1,7 @@
 import React, {Component} from "react";
+import { connect } from 'react-redux';
 
-export default class ShoppingList extends Component {
+class ShoppingList extends Component {
 
 	render(){
         if (this.props.data) {
@@ -43,3 +44,9 @@ export default class ShoppingList extends Component {
 		}
 	}
 }
+
+const mapStateToProps = state => ({
+    shopping_list: state.shopping_list
+})
+
+export default connect(mapStateToProps)(ShoppingList)

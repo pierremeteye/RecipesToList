@@ -1,61 +1,24 @@
-import React from "react";
-import Enzyme, { shallow, render, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import { createSerializer } from "enzyme-to-json";
-import sinon from "sinon";
+// Link.react.test.js
+import React from 'react';
+import Link from './Components/Link.js';
+import renderer from 'react-test-renderer';
 
-expect.addSnapshotSerializer(createSerializer({ mode: "deep" }));
+test('Link changes the class when hovered', () => {
+  const component = renderer.create(
+    <Link page="http://www.facebook.com">Facebook</Link>,
+  );
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 
-Enzyme.configure({ adapter: new Adapter() });
+  // manually trigger the callback
+  tree.props.onMouseEnter();
+  // re-rendering
+  tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 
-// Components import
-import App from './App.js';
-import Popup from './Components/Popup.jsx';
-import RecipeList from './Components/RecipeList.jsx';
-import ShoppingList from './Components/ShoppingList.jsx';
-
-it("renders correctly App Component", () => {
-	const AppTest = shallow(
-		<App />
-		);
-	expect(AppTest);
-  // expect(AppTest).toMatchSnapshot();
-});
-
-it("renders correctly Popup Component", () => {
-	const dataPopup = {
-		title: 'test',
-		arr: ['test'],
-		value: 0
-	}
-	const PopupTest = shallow(
-		<Popup 
-		data={dataPopup.title} 
-		getValue={dataPopup.value}
-		initialIngredients={dataPopup.arr}
-		/>
-		);
-	expect(PopupTest);
-  // expect(PopupTest).toMatchSnapshot();
-});
-
-it("renders correctly RecipeList Component", () => {
-	const dataRecipeList = {
-		arr: ['test']
-	}
-	const RecipeListTest = shallow(
-		<RecipeList 
-		data={dataRecipeList.arr} 
-		/>
-		);
-	expect(RecipeListTest);
-  // expect(RecipeListTest).toMatchSnapshot();
-});
-
-it("renders correctly ShoppingList Component", () => {
-	const ShoppingListTest = shallow(
-		<ShoppingList />
-		);
-	expect(ShoppingListTest);
-  // expect(ShoppingListTest).toMatchSnapshot();
+  // manually trigger the callback
+  tree.props.onMouseLeave();
+  // re-rendering
+  tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 });
