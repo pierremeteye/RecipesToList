@@ -5,6 +5,14 @@ import { popupOpenAction, popupCloseAction, selectedRecipe } from '../actions/ac
 
 import Popup from "./Popup";
 
+import Icon from '@material-ui/core/Icon';
+
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
 class RecipeList extends Component {
 
     getIngredientsPopup(dataFromPopup) {
@@ -17,19 +25,24 @@ class RecipeList extends Component {
     
     showRecipe(index) {
         this.props.onSelectedRecipe(index)
-        this.props.showRecipe('yes')
+        this.props.showRecipe(true)
     }
     
     hideRecipe(){
-        this.props.hideRecipe('no')
+        this.props.hideRecipe(false)
     }
-    
+
     render() {
 		var recipes = this.props.articles.map((recipe, i) => {
 			return  <div key={i} className="col-12 f-l relative m-t-10">
         				<div className="col-8 f-l">
                             <p className="col-8 f-l">{recipe.title}</p>
-                            <button className="f-l pointer" onClick={this.showRecipe.bind(this, i)}>Voir la recette</button>
+                            <Button 
+                                variant="contained" 
+                                color="primary" 
+                                className="f-l pointer" 
+                                onClick={this.showRecipe.bind(this, i)}>Voir la recette
+                            </Button>
                         </div>
                         <div className="col-4 f-l">
                             <img className="col-4 f-l" src={'images/' + recipe.image_name} alt={recipe.title}/>
@@ -42,14 +55,16 @@ class RecipeList extends Component {
                     <div className="p-30">
                     <h3 className="col-12 f-l p-b-10">Ingredients List</h3>
                         {recipes}
-                        <div className={this.props.popup === 'no' ? 'popup hide' : 'popup'}>
-                            <div className="col-6 bgWhite fullCentered p-20 p-t-0">
-                                <p className="pointer" onClick={this.hideRecipe.bind(this)}>
-                                    <i className="zmdi zmdi-close fs-50 f-r p-10 p-r-0"></i>
-                                </p>
-                                <Popup />
+                        <Dialog
+                          open={this.props.popup}
+                          className={"col-12"}
+                        >
+                            <div style={{width: 1000}}>
+                            <Icon onClick={this.hideRecipe.bind(this)} className="close pointer absolute r-0">close</Icon>
+
+                            <Popup />
                             </div>
-                        </div>
+                        </Dialog>
                         <div className="both"></div>
                     </div>
                 </div>

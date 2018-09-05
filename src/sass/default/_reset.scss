@@ -3,3 +3,16 @@
 *    RESET
 *
 */
+
+// MATERIAL UI
+.MuiDialog-paperWidthSm-8 {
+	max-width: initial !important;
+}
+
+.MuiDialog-paper-4 {
+    overflow-y: initial !important;
+}
+
+button[class^="MuiButtonBase"] span {
+    color: #fff;
+}
