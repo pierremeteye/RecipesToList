@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { shoppingList } from '../actions/actions.js';
-import Button from '@material-ui/core/Button';
 
 const list = {};
 
@@ -70,7 +69,7 @@ class Popup extends Component {
                             <p>{recette.instructions}</p>
                         </div>
                         <div className="col-12 f-l p-t-30 p-b-30 center">
-                            <Button variant="contained" color="primary" onClick={this.addToShoppingList.bind(this)} className="pointer">Add this recipe to my shopping list</Button>
+                            <button onClick={this.addToShoppingList.bind(this)} className="pointer">Add this recipe to my shopping list</button>
                         </div>
                     </div>
         } else {
