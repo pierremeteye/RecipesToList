@@ -6,28 +6,24 @@ import { popupOpenAction, popupCloseAction, selectedRecipe } from '../actions/ac
 import Popup from "./Popup";
 
 class RecipeList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ingredient_index: null,
-            value: null,
-            isHidden: false,
-            ingredients: null
-        };
-    }
+
     getIngredientsPopup(dataFromPopup) {
         this.props.getIngredient(dataFromPopup)
     }
+    
     getNumber(getNumber){
         this.props.getNumber(getNumber)
     }
+    
     showRecipe(index) {
         this.props.onSelectedRecipe(index)
         this.props.showRecipe('yes')
     }
+    
     hideRecipe(){
         this.props.hideRecipe('no')
     }
+    
     render() {
 		var recipes = this.props.articles.map((recipe, i) => {
 			return  <div key={i} className="col-12 f-l relative m-t-10">

@@ -4,16 +4,20 @@ import { connect } from 'react-redux';
 class ShoppingList extends Component {
 
 	render(){
-        if (this.props.data) {
-			let arrQuantity = Object.values(this.props.list),
-				arrIngredients = Object.keys(this.props.list),
-                ingredients = arrIngredients.map((ingredient, i) => {
-                    return <tr key={ingredient + '-' + i}><td>{ingredient}</td></tr>;
+			
+			let ingredients = Object.values(this.props.shopping_list).map((el, i) => {
+                    return <tr key={el.name + '-' + i}><td>{el.name}</td></tr>;
                 }),
-                quantity = arrQuantity.map((quantity, i) => {
-                    return <tr key={quantity + '-' + i}><td>{quantity}</td></tr>;
+				test = Object.values(this.props.shopping_list).map((el, i) => {
+                    return <tr key={el.name + '-' + i}>
+                    			<td>{el.name}</td>
+                    			<td>{el.quantity === 0 ? '' : el.quantity + ' ' + el.unit}</td>
+                    		</tr>;
+                }),
+            	quantity = Object.values(this.props.shopping_list).map((el, i) => {
+                    return <tr key={el.el + el.unit + '-' + i}><td>{el.quantity === 0 ? '' : el.quantity + ' ' + el.unit}</td></tr>;
                 })
-			;
+            ;		
 
 			return 	<div className="ShoppingList col-12">
 			            <div className="col-6 f-l">
@@ -25,23 +29,15 @@ class ShoppingList extends Component {
 										<tbody>
 											<tr>
 												<th>Ingredients</th>
-											</tr>
-											{ingredients}
-										</tbody>
-									</table>
-									<table className="f-l">
-										<tbody>
-											<tr>
 												<th>Quantity</th>
 											</tr>
-											{quantity}
+											{test}
 										</tbody>
 									</table>
 								</div>
 		                    </div>
 		                </div>
 		            </div>
-		}
 	}
 }
 

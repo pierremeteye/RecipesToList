@@ -2,42 +2,43 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { shoppingList } from '../actions/actions.js';
+import Button from '@material-ui/core/Button';
+
+const list = {};
 
 class Popup extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ingredients: [],
-            quantity: []
-        };
-    }
 
-    addToShoppingList(el) {
-        let allIngredients = [],
-            allQuantity = [],
-            arr = this.state.ingredients,
-            list = {}
-        ;
+    addToShoppingList() {
 
         this.props.articles[this.props.selected_recipe].ingredients.map((el, i)  => {
-            allIngredients.push(el.name);
-            allQuantity.push(Math.round(el.quantity));
-            return true;
-        })
 
-        this.setState((prevState, props) => ({
-            ingredients: [...prevState.ingredients, ...allIngredients],
-            quantity: [...prevState.quantity, ...allQuantity]
-        }));
-
-
-        for (let i = 0; i < arr.length; i++) {
-            if (list[this.state.ingredients[i]] === undefined) {
-                list[this.state.ingredients[i]] = this.state.quantity[i];
+            if (Object.keys(list).length < 1) {
+                list[i] = {
+                    name: el.name,
+                    quantity: Math.round(el.quantity),
+                    unit: el.unit
+                }
             } else {
-                list[this.state.ingredients[i]] += this.state.quantity[i];   
+                var check = false;
+                for (var key in list) {
+                    if (list[key].name === el.name) {
+                        check = true;
+                        list[key].quantity += Math.round(el.quantity);
+                        break;
+                    }
+                }
+                if (!check) {
+                    list[Object.keys(list).length] = {
+                        name: el.name,
+                        quantity: Math.round(el.quantity),
+                        unit: el.unit
+                    }
+                }
             }
-        }
+
+            return true;
+
+        });
 
         this.props.addToShoppingList(list);
 
@@ -50,7 +51,7 @@ class Popup extends Component {
                 let quantity = (ingredient.quantity === 0 ? '' : ' / ' + Math.round(ingredient.quantity*100)/100) + '' + (ingredient.quantity === 0 ? '' : ingredient.unit)
                 return <li key={i}>{ingredient.name + quantity}</li>
             })
-        
+
             return  <div>
                         <h2 className="col-12 f-l center">{recette.title} / <span className="green">{recette.servings} persons</span></h2>
                         <div className="col-12 f-l p-t-45">
@@ -69,7 +70,7 @@ class Popup extends Component {
                             <p>{recette.instructions}</p>
                         </div>
                         <div className="col-12 f-l p-t-30 p-b-30 center">
-                            <button onClick={this.addToShoppingList.bind(this)} className="pointer">Add this recipe to my shopping list</button>
+                            <Button variant="contained" color="primary" onClick={this.addToShoppingList.bind(this)} className="pointer">Add this recipe to my shopping list</Button>
                         </div>
                     </div>
         } else {
